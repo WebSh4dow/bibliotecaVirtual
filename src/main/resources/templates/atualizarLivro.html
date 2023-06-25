@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="x-ua-compatible" content="ie=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Sistema de Gestão para Biblioteca Escolar: Cadastro de Livros</title>
+	<!-- Importando os estilos do Material-UI -->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+	<style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Roboto", sans-serif;
+      background-color: #f7f7f7;
+      background-image: url("https://res.cloudinary.com/dk-find-out/image/upload/q_80,w_1920,f_auto/Clouds_iStock-183162453_d7mso2.jpg");
+      background-repeat: repeat;
+      background-position: center center;
+      background-attachment: fixed;
+    }
+
+    .top-bar {
+      background-color: #1976d2;
+      color: #fff;
+      padding: 10px;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .main-container {
+      display: flex;
+      height: calc(100vh - 60px); /* Subtrai a altura da top-bar */
+      overflow: hidden;
+    }
+
+    .sidebar {
+      width: 250px;
+      background-color: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .content {
+      flex: 1;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+ .card {
+  display: flex;
+  flex-direction: row;
+  width: 600px;
+  margin: 20px;
+  padding: 20px;
+  background-color: #f5f5f5;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.card img {
+  max-width: 200px;
+  max-height: 200px;
+  margin-right: 20px;
+}
+
+.card-content {
+  flex: 1;
+}
+
+.card-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.card-description {
+  margin-bottom: 10px;
+}
+
+
+    .card-actions {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 20px;
+    }
+
+    .btn {
+      width: 120px;
+      font-size: 14px;
+    }
+
+    .footer {
+      background-color: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      text-align: center;
+      padding: 10px;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
+
+    /* Estilos personalizados para o menu hamburguer */
+    .sidenav-trigger {
+      display: inline-block;
+      margin-right: 20px;
+    }
+
+    .sidenav-trigger:before,
+    .sidenav-trigger:after,
+    .sidenav-trigger .material-icons {
+      transition: all 0.3s;
+    }
+
+    .sidenav-trigger:before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 20px;
+      height: 2px;
+      background-color: #000;
+      transform: translate(-50%, -50%);
+    }
+
+    .sidenav-trigger:after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 20px;
+      height: 2px;
+      background-color: #000;
+      transform: translate(-50%, -50%) rotate(-90deg);
+    }
+
+    .sidenav-trigger .material-icons {
+      position: relative;
+      top: 50%;
+      left: 50%;
+      font-size: 24px;
+      transform: translate(-50%, -50%);
+      color: #000;
+      background-color: rgba(0, 0, 0, 0.1);
+      border-radius: 50%;
+      padding: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+  </style>
+</head>
+
+<body>
+<div class="top-bar">
+	<h2>Sistema de Controle de Livros: Colégio Jaime Alencar</h2>
+	<p>
+		O conhecimento que adquirimos através do estudo é uma herança que podemos compartilhar para construir um mundo
+		melhor para as gerações futuras.
+	</p>
+</div>
+
+<ul class="sidenav" id="mobile-nav">
+	<li><a href="/livros/cadastrar"><i class="material-icons">book</i>Cadastrar Livros</a></li>
+	<li><a href="/usuarios/cadastrar"><i class="material-icons">people</i>Cadastrar Alunos</a></li>
+	<li><a href="/emprestimos/cadastrar"><i class="material-icons">handshake</i>Registrar Empréstimos</a></li>
+	<li><a href="/home"><i class="material-icons">menu</i>Menu inicial</a></li>
+</ul>
+
+<div class="main-container">
+	<a href="#" data-target="mobile-nav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+	<div class="content">
+		<div class="card">
+			<form action="#"
+				  th:action="@{/livros/update/{id} (id=${livro.id}) }"
+				  th:object="${livro}" method="post">
+				<div class="card-title">Edição de Livros</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="isbn">ISBN</label>
+							<input type="text" th:field="*{isbn}" class="form-control" id="isbn" placeholder="ISBN" required>
+							<div class="invalid-feedback">
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="autor">Autor</label>
+							<input type="text" th:field="*{autor}" class="form-control" id="autor" placeholder="Autor" required>
+							<div class="invalid-feedback">
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="titulo">Título</label>
+							<input type="text" th:field="*{titulo}" class="form-control" id="titulo" placeholder="Título" required>
+							<div class="invalid-feedback">
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="descricao">Descrição</label>
+							<input type="text" th:field="*{descricao}" class="form-control" id="descricao" placeholder="Descrição" required>
+							<div class="invalid-feedback">
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="text-center">
+					<button type="submit" class="btn waves-effect waves-light blue">Editar Livro</button>
+					<a href="#"  th:href="@{/home/}" class="btn waves-effect waves-light blue">Voltar para a tela inicial</a>
+				</div>
+			</form>
+
+		</div>
+	</div>
+</div>
+
+<div class="footer">
+	© 2023 Sistema de Gestão para Escola Jaime Alencar Todos os direitos reservados.
+</div>
+
+<!-- Importando as bibliotecas JavaScript do Material-UI -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var elems = document.querySelectorAll(".sidenav");
+      M.Sidenav.init(elems);
+    });
+  </script>
+</body>
+
+</html>

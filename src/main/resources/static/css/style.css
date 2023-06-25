@@ -1,0 +1,36 @@
+html, body {height:100%;}
+ 
+.container {
+	min-height:50%;
+    position:relative;
+    width:800px
+}
+
+
+ .borderSCEL  {
+  	border-color: tomato;
+  	border-style: solid;
+  	border-radius:20px;
+ }
+ 
+ .colSCEL {
+ 	background-color: tomato; 
+ 	border-radius: 20px;
+ }
+ 
+ .card-footer {
+ 	background-color: tomato;
+  	text-align: center;
+  	color: white;
+	vertical-align: middle;
+	position:absolute;
+	bottom:0px;
+	width:100%;
+ }
+ 
+ .navbar {
+ 	background-color: tomato;
+ }
+
+
+
